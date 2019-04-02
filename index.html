@@ -17,38 +17,54 @@
 			<!-- corpo da pagina onde fica cada termometro-->
 			<ul>
 				<li class="li-temp-container">
-					<div class="div-temp-bg">
-						<div class="div-temp-slider"></div>
+					<div class="div-temp-bg" >
+						<div class="div-temp-slider" id="draggable-cel"></div>
 					</div>
 
-					<p class="p-nome-temp">
-						Celsius
-					</p>
+					<div class="div-temp-info">
+						<p class="p-nome-temp">
+							Celsius
+						</p>
+						<p id="p-info-cel" class="temp-degrees">
+							C°
+						</p>
+					</div>
+					
 				</li>
 
 				<li class="li-temp-container">
 					<div class="div-temp-bg">
-						<div class="div-temp-slider"></div>
+						<div class="div-temp-slider" id="draggable-fah"></div>
 					</div>
 
-					<p class="p-nome-temp">
-						Fahrenheit
-					</p>
+					<div class="div-temp-info">
+						<p class="p-nome-temp">
+							Fahrenheit
+						</p>
+						<p id="p-info-fah" class="temp-degrees">
+							F°
+						</p>
+					</div>
 				</li>
 
 				<li class="li-temp-container">
 					<div class="div-temp-bg">
-						<div class="div-temp-slider"></div>
+						<div class="div-temp-slider" id="draggable-kel"></div>
 					</div>
 
-					<p class="p-nome-temp">
-						Kelvin
-					</p>
+					<div class="div-temp-info">
+						<p class="p-nome-temp">
+							Kelvin
+						</p>
+						<p id="p-info-kel" class="temp-degrees">
+							K°
+						</p>
+					</div>
 				</li>
 			</ul>
 		</section>
 
-		<script src="./javascript/temperature.js"></script>
+		<script src="./javascript/jquery-3.3.1.slim.min.js"></script>
 		<script src="./javascript/main.js"></script>
 	</body>
 </html>
