@@ -63,6 +63,9 @@ function mouseMoved(event) {
 }
 
 function clickLifted(event) {
+	if(getThermSelected() == null){
+		return;
+	}
 	body.removeEventListener('mousemove', mouseMoved, false);
 	setSlidePosition(event);
 }
