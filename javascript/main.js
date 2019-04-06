@@ -4,60 +4,86 @@ const [infoCel, infoFah, infoKel] = document.getElementsByClassName('temp-degree
 
 const body = document.querySelector('body');
 
-const celsius = new Temperature(celContainer, celSlide, infoCel);
-const fahrenheit = new Temperature(fahContainer, fahSlide, infoFah);
-const kelvin = new Temperature(kelContainer, kelSlide, infoKel);
+const celsius = new Celsius(celContainer, celSlide, infoCel);
+const fahrenheit = new Fahrenheit(fahContainer, fahSlide, infoFah);
+const kelvin = new Kelvin(kelContainer, kelSlide, infoKel);
 
-celsius.container.addEventListener('mousedown', startDrag, false);
-fahrenheit.container.addEventListener('mousedown', startDrag, false);
-kelvin.container.addEventListener('mousedown', startDrag, false);
+// recebe o objeto do termometro selecionado
+let thermSelected = null;
 
-body.addEventListener('mouseup', stopSlide, false);
+celsius.container.addEventListener('mousedown', mousePressed, false);
+fahrenheit.container.addEventListener('mousedown', mousePressed, false);
+kelvin.container.addEventListener('mousedown', mousePressed, false);
 
-function startDrag(event) {
+
+
+body.addEventListener('mouseup', clickLifted, false);
+
+
+
+function getThermSelected() {
+	if (thermSelected == null) {
+		console.warn('No thermometer was selected!');
+	}
+	return thermSelected;
+}
+
+function setThermSelected(therm) {
+	switch (therm.target) {
+		case celsius.container:
+		case celsius.slider:
+			thermSelected = celsius;
+			break;
+		case fahrenheit.container:
+		case fahrenheit.slider:
+			thermSelected = fahrenheit;
+			break;
+		case kelvin.container:
+		case kelvin.slider:
+			thermSelected = kelvin;
+			break;
+		default:
+			console.warn('No thermometer was selected!');
+			thermSelected = null;
+			break;
+	}
+}
+
+function mousePressed(event) {
 	event.preventDefault();
-	body.addEventListener('mousemove', moveSlide, false);
-	setSlidePosition(event, getContainer(event));
+	setThermSelected(event);
+	body.addEventListener('mousemove', mouseMoved, false);
+	setSlidePosition(event, getContainerSelected());
 }
 
-function moveSlide(event) {
-    event.preventDefault();
-	setSlidePosition(event, getContainer(event));
+function mouseMoved(event) {
+	event.preventDefault();
+	let container = getContainerSelected();
+	setSlidePosition(event, container);
 }
 
-function stopSlide(event) {
-	event.preventDefault();	
-	getContainer(event).removeEventListener('mousemove', moveSlide, false);
-    setSlidePosition(event, getContainer(event));
+function clickLifted(event) {
+	body.removeEventListener('mousemove', mouseMoved, false);
+	setSlidePosition(event);
 }
 
-function setSlidePosition(event, container) {
-	let position = getPosition(event, container);
-	let slider = getSlider(event);
+function setSlidePosition(event) {
+	let position = getPosition(event, getContainerSelected());
+	let slider = getSlider();
 	slider.style.height = position + 'px';
 }
 
-function getContainer(event) {
-	if (event.target.children[0] == undefined) {		
-		return event.target.parentNode;
-	}
-	if (event.srcElement.tagName == 'LI'){
-		return event.srcElement.firstElementChild;
-	}
-	return event.target;
+function getContainerSelected() {
+	return thermSelected.container;
 }
 
-function getSlider(event) {
-	if (event.target.children[0] == undefined) {
-		return event.target;
-	} else {
-		return event.target.children[0];
-	}
+function getSlider() {
+	return thermSelected.slider;
 }
 
-// retorn a posição dentro do container
+// calcula a posição invertida, depois pega o valor absoluto
 function getPosition(event, container) {
-	let pos = (event.pageY - container.offsetTop) - container.clientHeight;
+	let pos = event.pageY - container.offsetTop - container.clientHeight;
 	pos = pos > 0 ? 0 : pos;
 	pos = pos < -200 ? -200 : pos;
 	return Math.abs(pos);
