@@ -57,5 +57,8 @@ function getSlider(event) {
 
 // retorn a posição dentro do container
 function getPosition(event, container) {
-	return Math.abs(event.pageY - container.offsetTop - container.clientHeight);
+	let pos = (event.pageY - container.offsetTop) - container.clientHeight;
+	pos = pos > 0 ? 0 : pos;
+	pos = pos < -200 ? -200 : pos;
+	return Math.abs(pos);
 }
