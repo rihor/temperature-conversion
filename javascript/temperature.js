@@ -1,13 +1,7 @@
 class Temperature {
-	constructor(value) {
-        this.value = value;
-    }
-
-    setValeu(value) {
-        this.value = value;
-    }
-
-    getValue(){
-        return this.value;
-    }
+	constructor(container, slider, info) {
+		this.container = container;
+		this.slider = slider;
+		this.info = info;
+	}
 }
