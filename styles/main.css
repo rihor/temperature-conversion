@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	font-family: Roboto;
+	font-family: Arial, Helvetica, sans-serif;
 	font-style: normal;
 	font-weight: normal;
 }
@@ -38,19 +38,19 @@ ul {
 .div-temp-bg {
 	background-color: #ccc;
 	width: 30px;
-	height: 200px;
-	display: flex;
-	align-items: flex-end;
+	height: 200px;	
+	position: relative;
+	cursor: pointer;
 }
 
 /* slider do termometro */
 .div-temp-slider {
-	/* background-color: salmon;
-	width: 30px;
-	height: 50px */
-	position: relative;
-	width: 30px;
-	height: 50px;
+	width: 100%;
+	height: 0%;		
+	left: 0%;
+	bottom: 0%;
+	position: absolute;
+	cursor: pointer;
 	background-color: salmon;
 }
 
