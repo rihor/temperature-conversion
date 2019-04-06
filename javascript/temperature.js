@@ -11,9 +11,13 @@ class Celsius extends Temperature {
 		super(container, slider, info);
 	}
 
-	convertToFahrenheit() {}
+	toFahrenheit(value) {
+		return (value * 1.8 + 32).toFixed(2);
+	}
 
-	convertToKelvin() {}
+	toKelvin(value) {
+		return (value + 273.15).toFixed(2);
+	}
 }
 
 class Fahrenheit extends Temperature {
@@ -21,9 +25,13 @@ class Fahrenheit extends Temperature {
 		super(container, slider, info);
 	}
 
-	convertToCelsius() {}
+	toCelsius(value) {
+		return ((value - 32) * 5/9).toFixed(2);
+	}
 
-	convertToKelvin() {}
+	toKelvin(value) {
+		return ((value - 32) * 5/9 + 273.15).toFixed(2); 
+	}
 }
 
 class Kelvin extends Temperature {
@@ -31,7 +39,11 @@ class Kelvin extends Temperature {
 		super(container, slider, info);
 	}
 
-	convertToCelsius() {}
+	toCelsius(value) {
+		return (value - 273.15).toFixed(2);
+	}
 
-	convertToFahrenheit() {}
+	toFahrenheit(value) {
+		return ((value - 273.15) * 9/5 + 32).toFixed(2);
+	}
 }
